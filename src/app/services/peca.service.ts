@@ -1,3 +1,4 @@
+import { Peca } from './../models/Peca';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -5,30 +6,30 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class PecaService {
+export class PecaService{
 
-  protected baseUrl = 'http://localhost:8080/pecas';
+  // private basePecaUrl = 'http://localhost:8080/pecas';
 
-  constructor(protected httpClient: HttpClient) { }
+  // constructor(private http: HttpClient) { }
 
-  findAll(): Observable<any[]> {
-    return this.httpClient.get<any[]>(this.baseUrl);
-  }
+  // create(dto: any): Observable<any> {
+  //   return this.http.post(`${this.basePecaUrl}/create`, dto);
+  // }
 
-  findById(id: string): Observable<any> {
-    return this.httpClient.get<any>(`${this.baseUrl}/${id}`);
-  }
+  // update(id: number, dto: any): Observable<any> {
+  //   return this.http.put(`${this.basePecaUrl}/${id}`, dto);
+  // }
 
-  insert(peca: any): Observable<any> {
-    return this.httpClient.post<any>(this.baseUrl, peca);
-  }
+  // delete(id: number): Observable<any> {
+  //   return this.http.delete(`${this.basePecaUrl}/${id}`);
+  // }
 
-  update(peca: any): Observable<any> {
-    return this.httpClient.put<any>(`${this.baseUrl}/${peca.id}`, peca);
-  }
+  // findById(id: number): Observable<any> {
+  //   return this.http.get(`${this.basePecaUrl}/${id}`);
+  // }
 
-  delete(id: string): Observable<any> {
-    return this.httpClient.delete<any>(`${this.baseUrl}/${id}`);
-  }
+  // findAll(): Observable<any> {
+  //   return this.http.get(this.basePecaUrl);
+  // }
 
 }
