@@ -7,30 +7,46 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class SuspensaoPadraoService {
+export class SuspensaoPadraoService extends PecaService {
 
   private baseUrl = 'http://localhost:8080/suspensaopadrao';
 
   constructor(private httpClient: HttpClient) {
+    super(httpClient);
   }
 
-  findAll(): Observable<SuspensaoPadrao[]> {
+
+  override findAll(): Observable<SuspensaoPadrao[]> {
     return this.httpClient.get<SuspensaoPadrao[]>(this.baseUrl);
   }
 
-  findById(id: string): Observable<SuspensaoPadrao> {
+  override findById(id: string): Observable<SuspensaoPadrao> {
     return this.httpClient.get<SuspensaoPadrao>(`${this.baseUrl}/${id}`);
   }
 
-  insert(suspensaopadrao: SuspensaoPadrao): Observable<SuspensaoPadrao> {
-    return this.httpClient.post<SuspensaoPadrao>(this.baseUrl, suspensaopadrao);
+  override create(suspensaopadrao: SuspensaoPadrao): Observable<SuspensaoPadrao> {
+    const data = {
+      nome: suspensaopadrao.nome,
+      preco: suspensaopadrao.preco,
+      descricao: suspensaopadrao.descricao,
+      compatibilidade: suspensaopadrao.compatibilidade,
+      idDadostecnicos: suspensaopadrao.dadosTecnicos.id,
+    }
+    return this.httpClient.post<SuspensaoPadrao>(this.baseUrl, data);
   }
 
-  update(suspensaopadrao: SuspensaoPadrao): Observable<SuspensaoPadrao> {
-    return this.httpClient.put<SuspensaoPadrao>(`${this.baseUrl}/${suspensaopadrao.id}`, suspensaopadrao);
+  override update(suspensaopadrao: SuspensaoPadrao): Observable<SuspensaoPadrao> {
+    const data = {
+      nome: suspensaopadrao.nome,
+      preco: suspensaopadrao.preco,
+      descricao: suspensaopadrao.descricao,
+      compatibilidade: suspensaopadrao.compatibilidade,
+      idDadostecnicos: suspensaopadrao.dadosTecnicos.id,
+    }
+    return this.httpClient.put<SuspensaoPadrao>(`${this.baseUrl}/${suspensaopadrao.id}`, data);
   }
 
-  delete(suspensaopadrao: SuspensaoPadrao): Observable<any> {
+  override delete(suspensaopadrao: SuspensaoPadrao): Observable<any> {
     return this.httpClient.delete<any>(`${this.baseUrl}/${suspensaopadrao.id}`);
 
 

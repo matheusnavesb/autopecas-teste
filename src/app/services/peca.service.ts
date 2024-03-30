@@ -8,28 +8,28 @@ import { Observable } from 'rxjs';
 })
 export class PecaService{
 
-  // private basePecaUrl = 'http://localhost:8080/pecas';
+  private basePecaUrl = 'http://localhost:8080/pecas';
 
-  // constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-  // create(dto: any): Observable<any> {
-  //   return this.http.post(`${this.basePecaUrl}/create`, dto);
-  // }
+  create(dto: any): Observable<any> {
+    return this.http.post(`${this.basePecaUrl}/create`, dto);
+  }
 
-  // update(id: number, dto: any): Observable<any> {
-  //   return this.http.put(`${this.basePecaUrl}/${id}`, dto);
-  // }
+  update( dto: any, peca: Peca): Observable<any> {
+    return this.http.put(`${this.basePecaUrl}`, dto);
+  }
 
-  // delete(id: number): Observable<any> {
-  //   return this.http.delete(`${this.basePecaUrl}/${id}`);
-  // }
+  delete(peca: Peca): Observable<any> {
+    return this.http.delete(`${this.basePecaUrl}/${peca.id}`);
+  }
 
-  // findById(id: number): Observable<any> {
-  //   return this.http.get(`${this.basePecaUrl}/${id}`);
-  // }
+  findById(id: string): Observable<any> {
+    return this.http.get(`${this.basePecaUrl}/${id}`);
+  }
 
-  // findAll(): Observable<any> {
-  //   return this.http.get(this.basePecaUrl);
-  // }
+  findAll(): Observable<any> {
+    return this.http.get(this.basePecaUrl);
+  }
 
 }

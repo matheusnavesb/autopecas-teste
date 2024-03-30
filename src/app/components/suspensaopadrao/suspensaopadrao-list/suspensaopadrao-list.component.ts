@@ -24,14 +24,29 @@ export class SuspensaoPadraoListComponent implements OnInit {
   ];
   suspensoespadrao: SuspensaoPadrao[] = [];
 
-  constructor(private suspensaopadraoservice: SuspensaoPadraoService) { }
+  constructor(private suspensaopadraoservice: SuspensaoPadraoService, private router: Router) { }
 
   ngOnInit(): void {
     this.suspensaopadraoservice.findAll().subscribe(data => {
       this.suspensoespadrao = data;
     });
   }
+
+  excluir(suspensaopadrao: SuspensaoPadrao) {
+    this.suspensaopadraoservice.delete(suspensaopadrao).subscribe({
+      next: () => {
+        this.router.navigateByUrl('/suspensaopadrao');
+        this.ngOnInit();
+      },
+      error: (err) => {
+        console.log('Erro ao Excluir' + JSON.stringify(err));
+      },
+    });
+  }
+
 }
+
+
 
   // excluir(suspensaopadrao: any) {
   //   this.suspensaopadraoservice.delete(suspensaopadrao.id).subscribe({
